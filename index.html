@@ -3,18 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Starpath Property — Starpath Holdings Ltd.</title>
+    
+    <!-- PWA Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0B1F3A" />
+    <meta name="background-color" content="#0B1F3A" />
+    
+    <!-- iOS Web App Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Starpath" />
+    <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/assets/icon-512.png" />
+    
+    <!-- Android / Chrome Support -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Starpath Property" />
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   </head>
-  <body class="bg-slate-900 text-slate-900 antialiased selection:bg-red-500 selection:text-white">
+  <body class="bg-[#0B1F3A] text-slate-900 antialiased selection:bg-red-500 selection:text-white overscroll-none">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
 

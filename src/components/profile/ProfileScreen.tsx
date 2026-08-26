@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useProperty } from '../../context/PropertyContext';
 import { 
   ShieldCheck, Phone, Mail, Globe, MapPin, Building, 
@@ -63,6 +63,28 @@ export const ProfileScreen: React.FC = () => {
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-red-600 transition" />
           </div>
         </div>
+
+        {/* PWA Phone Installation Guide Card */}
+        <div className="bg-gradient-to-r from-[#0B1F3A] to-[#1e3c66] rounded-2xl p-4 text-white shadow-md border border-slate-700">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="flex items-center space-x-1.5">
+                <span className="bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded">
+                  MOBILE APP
+                </span>
+                <h3 className="text-xs font-extrabold text-white">Install on Phone Home Screen</h3>
+              </div>
+              <p className="text-[11px] text-slate-300 mt-1 leading-snug">
+                Open <strong>starpath-property.surge.sh</strong> on your phone.
+              </p>
+              <ul className="text-[10px] text-slate-300 mt-1.5 space-y-0.5 list-disc list-inside">
+                <li><strong>Android/Chrome:</strong> Tap <em>"Install"</em> on the bottom prompt.</li>
+                <li><strong>iPhone/Safari:</strong> Tap <em>Share icon</em> → <em>"Add to Home Screen"</em>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
 
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 gap-2.5">

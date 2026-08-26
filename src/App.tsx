@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { PropertyProvider, useProperty } from './context/PropertyContext';
 import { DeviceFrame } from './components/common/DeviceFrame';
 import { Header } from './components/common/Header';
@@ -11,6 +11,7 @@ import { ProfileScreen } from './components/profile/ProfileScreen';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ProjectDetailsScreen } from './components/project/ProjectDetailsScreen';
 import { InquiryModal } from './components/project/InquiryModal';
+import { PWAInstallPrompt } from './components/common/PWAInstallPrompt';
 
 const MainContent: React.FC = () => {
   const { activeTab, selectedProjectId } = useProperty();
@@ -21,6 +22,7 @@ const MainContent: React.FC = () => {
       <main className="flex-1 flex flex-col relative">
         <ProjectDetailsScreen />
         <InquiryModal />
+        <PWAInstallPrompt />
       </main>
     );
   }
@@ -42,6 +44,7 @@ const MainContent: React.FC = () => {
       {/* Only show BottomNav for buyer tabs (or all tabs except detailed full screens) */}
       <BottomNav />
       <InquiryModal />
+      <PWAInstallPrompt />
     </div>
   );
 };
@@ -55,3 +58,4 @@ export default function App() {
     </PropertyProvider>
   );
 }
+
