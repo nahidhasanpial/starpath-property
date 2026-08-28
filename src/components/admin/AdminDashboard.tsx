@@ -1,12 +1,18 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useProperty } from '../../context/PropertyContext';
 import { Project } from '../../types';
 import { EditProjectModal } from './EditProjectModal';
 import { InquiriesListModal } from './InquiriesListModal';
 import { 
   Building2, Home, Users, Edit3, ArrowLeft, RefreshCw, 
-  Sparkles, CheckCircle2, Shield, Eye, TrendingUp, AlertTriangle, Plus 
+  Sparkles, CheckCircle2, Shield, Eye, TrendingUp, AlertTriangle, Plus,
+  FileSpreadsheet, Link, Copy, Check, Send
 } from 'lucide-react';
+import { 
+  getGoogleSheetWebhookUrl, 
+  setGoogleSheetWebhookUrl, 
+  submitInquiryToGoogleSheet 
+} from '../../services/googleSheetService';
 
 export const AdminDashboard: React.FC = () => {
   const { 
@@ -23,11 +29,66 @@ export const AdminDashboard: React.FC = () => {
   const [isInquiriesOpen, setIsInquiriesOpen] = useState(false);
   const [resetSuccessNotice, setResetSuccessNotice] = useState(false);
 
+  // Google Sheet Webhook State
+  const [sheetWebhookUrl, setSheetWebhookUrl] = useState(getGoogleSheetWebhookUrl());
+  const [isUrlSaved, setIsUrlSaved] = useState(false);
+  const [testStatus, setTestStatus] = useState<string | null>(null);
+  const [showScriptGuide, setShowScriptGuide] = useState(false);
+  const [copiedScript, setCopiedScript] = useState(false);
+
   // Live aggregated KPIs
   const totalProjects = projects.length;
   const totalAvailableUnits = projects.reduce((acc, p) => acc + p.availableUnits, 0);
   const totalInquiries = inquiries.length;
   const newInquiriesCount = inquiries.filter(i => i.status === 'New').length;
+
+  const handleSaveWebhook = (e: React.FormEvent) => {
+    e.preventDefault();
+    setGoogleSheetWebhookUrl(sheetWebhookUrl);
+    setIsUrlSaved(true);
+    setTimeout(() => setIsUrlSaved(false), 2000);
+  };
+
+  const handleSendTestLead = async () => {
+    setTestStatus('Sending test inquiry to Google Sheet...');
+    const res = await submitInquiryToGoogleSheet({
+      inquiryId: `TEST-${Math.floor(1000 + Math.random() * 9000)}`,
+      projectName: 'Peace Harbor',
+      projectArea: 'Bashundhara',
+      fullName: 'Test Customer (Starpath)',
+      phone: '01700000000',
+      email: 'test@starpathholdings.com',
+      preferredDate: 'Tomorrow, 10:00 AM',
+      message: 'Test lead connection from Starpath Property App.',
+      timestamp: new Date().toLocaleString()
+    });
+    setTestStatus(res.message);
+    setTimeout(() => setTestStatus(null), 4000);
+  };
+
+  const googleAppsScriptCode = `function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var params = e.parameter;
+  sheet.appendRow([
+    new Date(),
+    params.inquiryId || "N/A",
+    params.projectName || "N/A",
+    params.projectArea || "N/A",
+    params.fullName || "N/A",
+    params.phone || "N/A",
+    params.email || "N/A",
+    params.preferredDate || "N/A",
+    params.message || "N/A"
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+}`;
+
+  const copyScriptCode = () => {
+    navigator.clipboard?.writeText(googleAppsScriptCode);
+    setCopiedScript(true);
+    setTimeout(() => setCopiedScript(false), 2000);
+  };
+
 
   const handleEditClick = (project: Project) => {
     setEditingProject(project);
@@ -135,8 +196,103 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Google Sheets Real-Time Sync Card */}
+      <div className="px-4 mt-5">
+        <div className="bg-white rounded-2xl p-4 border border-emerald-300 shadow-sm bg-gradient-to-b from-white to-emerald-50/20">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <FileSpreadsheet className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-black text-[#0B1F3A]">Google Sheets Lead Integration</h3>
+                <p className="text-[10px] text-slate-500">Live automatic lead routing directly into your spreadsheet</p>
+              </div>
+            </div>
+
+            <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${
+              sheetWebhookUrl ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
+            }`}>
+              {sheetWebhookUrl ? '● Connected' : 'Optional Webhook'}
+            </span>
+          </div>
+
+          {/* Webhook URL Input */}
+          <form onSubmit={handleSaveWebhook} className="mt-3 space-y-2">
+            <div className="flex space-x-1.5">
+              <input
+                type="url"
+                placeholder="Paste Google Apps Script Web App URL..."
+                value={sheetWebhookUrl}
+                onChange={(e) => setSheetWebhookUrl(e.target.value)}
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-900 focus:bg-white focus:border-emerald-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-[#0B1F3A] hover:bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shrink-0"
+              >
+                {isUrlSaved ? 'Saved!' : 'Save URL'}
+              </button>
+            </div>
+          </form>
+
+          {/* Action Buttons */}
+          <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100 text-xs">
+            <button
+              onClick={handleSendTestLead}
+              className="text-emerald-700 hover:text-emerald-800 font-bold text-[11px] flex items-center space-x-1"
+            >
+              <Send className="w-3 h-3" />
+              <span>Send Test Lead</span>
+            </button>
+
+            <button
+              onClick={() => setShowScriptGuide(!showScriptGuide)}
+              className="text-slate-600 hover:text-[#0B1F3A] font-semibold text-[11px] flex items-center space-x-1"
+            >
+              <Link className="w-3 h-3 text-red-500" />
+              <span>{showScriptGuide ? 'Hide Script Guide' : 'Get 30-Sec Google Script'}</span>
+            </button>
+          </div>
+
+          {testStatus && (
+            <div className="mt-2.5 p-2 rounded-xl bg-emerald-100/90 text-emerald-900 text-[11px] font-bold text-center animate-in fade-in">
+              {testStatus}
+            </div>
+          )}
+
+          {/* 30-Second Google Apps Script Guide Drawer */}
+          {showScriptGuide && (
+            <div className="mt-3 pt-3 border-t border-slate-200 text-xs text-slate-700 space-y-2 animate-in fade-in">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900 text-[11px]">Google Apps Script (Paste in Google Sheets):</span>
+                <button
+                  onClick={copyScriptCode}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-1 rounded-md flex items-center space-x-1"
+                >
+                  {copiedScript ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                  <span>{copiedScript ? 'Copied!' : 'Copy Code'}</span>
+                </button>
+              </div>
+
+              <pre className="bg-slate-900 text-slate-100 p-2.5 rounded-xl text-[10px] overflow-x-auto font-mono">
+                {googleAppsScriptCode}
+              </pre>
+
+              <ol className="text-[10px] text-slate-600 list-decimal list-inside space-y-0.5 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                <li>Create a Google Sheet and name column headers: <em>Date, ID, Project, Area, Name, Phone, Email, Visit, Message</em></li>
+                <li>Go to <strong>Extensions</strong> → <strong>Apps Script</strong>, paste the code above, click <strong>Save</strong>.</li>
+                <li>Click <strong>Deploy</strong> → <strong>New deployment</strong> → Select <strong>Web app</strong> (Execute as: <em>Me</em>, Who has access: <em>Anyone</em>).</li>
+                <li>Copy the generated Web App URL and paste it into the box above!</li>
+              </ol>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Projects List Header */}
       <div className="px-4 mt-5 mb-3 flex items-center justify-between">
+
         <div>
           <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
             Portfolio Inventory Management

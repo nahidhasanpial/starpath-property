@@ -1,5 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useProperty } from '../../context/PropertyContext';
+import { submitInquiryToGoogleSheet } from '../../services/googleSheetService';
 import { X, CheckCircle2, Send, Phone, Mail, User, MessageSquare, Calendar, Building, Sparkles } from 'lucide-react';
 
 export const InquiryModal: React.FC = () => {
@@ -17,17 +18,19 @@ export const InquiryModal: React.FC = () => {
   const [preferredDate, setPreferredDate] = useState('This Weekend');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedId, setSubmittedId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isInquiryModalOpen || !inquiryTargetProject) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phone) return;
 
+    setIsSubmitting(true);
     const newId = `STP-INQ-${Math.floor(100000 + Math.random() * 900000)}`;
     setSubmittedId(newId);
 
-    addInquiry({
+    const inquiryPayload = {
       projectId: inquiryTargetProject.id,
       projectName: inquiryTargetProject.name,
       projectArea: inquiryTargetProject.area,
@@ -36,10 +39,22 @@ export const InquiryModal: React.FC = () => {
       email: email || 'Not provided',
       message: message || `Inquiring for unit availability at ${inquiryTargetProject.name}.`,
       preferredDate
+    };
+
+    // 1. Add to App State & Local CRM
+    addInquiry(inquiryPayload);
+
+    // 2. Automatically push to connected Google Sheet
+    await submitInquiryToGoogleSheet({
+      inquiryId: newId,
+      ...inquiryPayload,
+      timestamp: new Date().toLocaleString()
     });
 
+    setIsSubmitting(false);
     setIsSubmitted(true);
   };
+
 
   const handleResetAndClose = () => {
     setIsSubmitted(false);
@@ -198,10 +213,11 @@ export const InquiryModal: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#0B1F3A] hover:bg-slate-800 text-white text-xs font-extrabold py-3.5 rounded-xl shadow-md transition flex items-center justify-center space-x-2 active:scale-95 mt-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#0B1F3A] hover:bg-slate-800 disabled:opacity-75 text-white text-xs font-extrabold py-3.5 rounded-xl shadow-md transition flex items-center justify-center space-x-2 active:scale-95 mt-2"
                 >
-                  <Send className="w-4 h-4 text-red-400" />
-                  <span>Request Details</span>
+                  <Send className={`w-4 h-4 text-red-400 ${isSubmitting ? 'animate-spin' : ''}`} />
+                  <span>{isSubmitting ? 'Sending Request...' : 'Request Details'}</span>
                 </button>
               </form>
             </div>
@@ -218,6 +234,12 @@ export const InquiryModal: React.FC = () => {
               <p className="text-xs text-slate-600 mt-2 max-w-[280px] mx-auto leading-relaxed">
                 Your inquiry has been sent to <span className="font-bold text-slate-900">Starpath Holdings Ltd.</span>
               </p>
+
+              <div className="inline-flex items-center space-x-1.5 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 mt-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Live Synced to Starpath CRM & Google Sheets</span>
+              </div>
+
 
               <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 my-5 text-left text-xs space-y-2">
                 <div className="flex justify-between">

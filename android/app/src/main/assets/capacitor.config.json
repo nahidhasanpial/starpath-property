@@ -1,0 +1,8 @@
+{
+	"appId": "com.starpath.property",
+	"appName": "Starpath Property",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	}
+}
