@@ -122,41 +122,16 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
         </div>
       </div>
 
-      {/* Main Mobile Screen Container */}
+      {/* Main Container */}
       <div
-        className={`w-full transition-all duration-300 ${
-          deviceFrame
-            ? 'max-w-[390px] min-h-[844px] sm:shadow-[0_25px_60px_rgba(0,0,0,0.8)] sm:rounded-[44px] sm:border-[8px] sm:border-slate-800 sm:ring-1 sm:ring-slate-700 overflow-hidden'
-            : 'max-w-md'
-        } bg-[#F8FAFC] relative flex flex-col`}
+        className="w-full max-w-md min-h-screen bg-[#F8FAFC] relative flex flex-col shadow-2xl sm:border-x sm:border-slate-800"
       >
-        {/* Device Status Bar Mock */}
-        <div className="bg-[#0B1F3A] text-white px-6 pt-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold select-none z-40">
-          <span>9:41</span>
-          
-          {/* Dynamic Island / Notch Pill */}
-          <div className="w-20 h-4 bg-black rounded-full mx-auto -mt-0.5 flex items-center justify-end pr-1.5">
-            <div className="w-2 h-2 rounded-full bg-slate-800" />
-          </div>
-
-          <div className="flex items-center space-x-1.5">
-            <span className="text-[10px]">5G</span>
-            <div className="w-4 h-2 rounded-xs border border-white/70 p-0.5 flex items-center">
-              <div className="w-full h-full bg-white rounded-2xs" />
-            </div>
-          </div>
-        </div>
-
         {/* Inner Screen Content */}
-        <div className="flex-1 flex flex-col relative overflow-x-hidden min-h-[750px]">
+        <div className="flex-1 flex flex-col relative overflow-x-hidden min-h-screen">
           {children}
         </div>
-
-        {/* Home Indicator Bar */}
-        <div className="bg-white/95 py-1.5 flex justify-center sticky bottom-0 z-40 border-t border-slate-100/50">
-          <div className="w-32 h-1 bg-slate-300 rounded-full" />
-        </div>
       </div>
+
 
       {/* Presentation Companion Modal */}
       {showDemoGuide && (
