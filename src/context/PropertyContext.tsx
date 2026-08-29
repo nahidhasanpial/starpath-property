@@ -1,10 +1,12 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Project, Inquiry, TabType, FilterState, Area } from '../types';
 import { INITIAL_PROJECTS, INITIAL_INQUIRIES } from '../data/projectsData';
 
 interface PropertyContextType {
   projects: Project[];
+  addProject: (newProj: Project) => void;
   updateProject: (updated: Project) => void;
+  deleteProject: (projectId: string) => void;
   savedProjectIds: string[];
   toggleSaveProject: (projectId: string) => void;
   isSaved: (projectId: string) => boolean;
@@ -13,6 +15,11 @@ interface PropertyContextType {
   updateInquiryStatus: (inquiryId: string, status: Inquiry['status']) => void;
   resetToDemoDefault: () => void;
   
+  // Admin Authentication
+  isAdminLoggedIn: boolean;
+  loginAdmin: (pin: string) => boolean;
+  logoutAdmin: () => void;
+
   // Navigation & state
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
@@ -35,6 +42,7 @@ interface PropertyContextType {
   setDeviceFrame: (val: boolean) => void;
 }
 
+
 const DEFAULT_FILTER: FilterState = {
   searchQuery: '',
   area: 'All',
@@ -48,7 +56,7 @@ const PropertyContext = createContext<PropertyContextType | undefined>(undefined
 
 export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>(() => {
-    const saved = localStorage.getItem('starpath_projects_v1');
+    const saved = localStorage.getItem('starpath_projects_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -56,15 +64,15 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   });
 
   const [savedProjectIds, setSavedProjectIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('starpath_saved_ids_v1');
+    const saved = localStorage.getItem('starpath_saved_ids_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
-    return ['grand-residence', 'peace-harbor'];
+    return ['barakah', 'peace-harbor'];
   });
 
   const [inquiries, setInquiries] = useState<Inquiry[]>(() => {
-    const saved = localStorage.getItem('starpath_inquiries_v1');
+    const saved = localStorage.getItem('starpath_inquiries_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -80,16 +88,46 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Sync to LocalStorage
   useEffect(() => {
-    localStorage.setItem('starpath_projects_v1', JSON.stringify(projects));
+    localStorage.setItem('starpath_projects_v2', JSON.stringify(projects));
   }, [projects]);
 
   useEffect(() => {
-    localStorage.setItem('starpath_saved_ids_v1', JSON.stringify(savedProjectIds));
+    localStorage.setItem('starpath_saved_ids_v2', JSON.stringify(savedProjectIds));
   }, [savedProjectIds]);
 
   useEffect(() => {
-    localStorage.setItem('starpath_inquiries_v1', JSON.stringify(inquiries));
+    localStorage.setItem('starpath_inquiries_v2', JSON.stringify(inquiries));
   }, [inquiries]);
+
+  // Admin Auth State
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(() => {
+    return localStorage.getItem('starpath_admin_session') === 'true';
+  });
+
+  const loginAdmin = (pin: string): boolean => {
+    // Standard PINs: 1234 or admin or starpath
+    const validPins = ['1234', 'admin', 'starpath', '2026'];
+    if (validPins.includes(pin.trim().toLowerCase())) {
+      setIsAdminLoggedIn(true);
+      localStorage.setItem('starpath_admin_session', 'true');
+      return true;
+    }
+    return false;
+  };
+
+  const logoutAdmin = () => {
+    setIsAdminLoggedIn(false);
+    localStorage.removeItem('starpath_admin_session');
+  };
+
+  const addProject = (newProj: Project) => {
+    setProjects(prev => [newProj, ...prev]);
+  };
+
+  const deleteProject = (projectId: string) => {
+    setProjects(prev => prev.filter(p => p.id !== projectId));
+    setSavedProjectIds(prev => prev.filter(id => id !== projectId));
+  };
 
   const updateProject = (updated: Project) => {
     setProjects(prev => prev.map(p => p.id === updated.id ? updated : p));
@@ -124,10 +162,10 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const resetToDemoDefault = () => {
     setProjects(INITIAL_PROJECTS);
     setInquiries(INITIAL_INQUIRIES);
-    setSavedProjectIds(['grand-residence', 'peace-harbor']);
-    localStorage.removeItem('starpath_projects_v1');
-    localStorage.removeItem('starpath_saved_ids_v1');
-    localStorage.removeItem('starpath_inquiries_v1');
+    setSavedProjectIds(['barakah', 'peace-harbor']);
+    localStorage.removeItem('starpath_projects_v2');
+    localStorage.removeItem('starpath_saved_ids_v2');
+    localStorage.removeItem('starpath_inquiries_v2');
   };
 
   const resetFilters = () => {
@@ -147,7 +185,9 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     <PropertyContext.Provider
       value={{
         projects,
+        addProject,
         updateProject,
+        deleteProject,
         savedProjectIds,
         toggleSaveProject,
         isSaved,
@@ -155,6 +195,9 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         addInquiry,
         updateInquiryStatus,
         resetToDemoDefault,
+        isAdminLoggedIn,
+        loginAdmin,
+        logoutAdmin,
         activeTab,
         setActiveTab,
         selectedProjectId,
@@ -174,6 +217,7 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     </PropertyContext.Provider>
   );
 };
+
 
 export const useProperty = () => {
   const context = useContext(PropertyContext);

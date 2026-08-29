@@ -2,53 +2,53 @@
 
 export const INITIAL_PROJECTS: Project[] = [
   {
-    id: 'grand-residence',
-    name: 'Starpath Grand Residence',
-    tagline: 'Ultra-Luxury Living in Banani DOHS',
+    id: 'barakah',
+    name: 'Starpath Barakah',
+    tagline: 'Signature Luxury Single-Unit Residence',
     area: 'Banani',
-    address: 'Road 11, Banani DOHS, Dhaka',
+    address: 'Banani DOHS, Dhaka',
     block: 'Banani DOHS',
-    price: '৳2.50 Crore',
-    priceRaw: 250,
+    price: '৳3.40 Crore',
+    priceRaw: 340,
     size: '3,600 sq. ft.',
     sizeSqft: 3600,
     bedrooms: 4,
     bathrooms: 5,
-    parking: 3,
-    totalUnits: 20,
-    availableUnits: 7, // Demo target: 7 -> 6
-    soldUnits: 13,
-    status: 'Ready to Move',
+    parking: 14,
+    totalUnits: 7,
+    availableUnits: 7, // Demo target
+    soldUnits: 0,
+    status: 'Upcoming',
     isFeatured: true,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    image: '/assets/barakah-main.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80'
+      '/assets/barakah-main.jpg',
+      '/assets/barakah-lobby.jpg',
+      '/assets/barakah-parking.jpg',
+      '/assets/barakah-rooftop.jpg'
     ],
-    description: 'Starpath Grand Residence is a masterwork in prestigious Banani DOHS. Offering ultra-spacious luxury suites with private elevator foyer, floor-to-ceiling panoramic glass, imported Spanish marble flooring, dual master suites with jacuzzi, and 3 covered car parking spaces.',
+    description: 'Starpath Barakah is a signature residential masterpiece in prestigious Banani DOHS. Featuring ultra-luxurious single-unit per floor living with expansive 3,600 sq. ft. floor plans, 4 grand bedrooms with 5 attached baths, 4 wide cross-ventilated verandahs, West-facing natural daylight, 14 covered car parking bays, and a landscaped rooftop retreat.',
     keyFeatures: [
-      '3,600 sq. ft. expansive single-unit floor layout',
-      '4 grand master bedrooms with ensuite designer baths',
-      'Private dedicated lift foyer & biometric entry',
-      '3 spacious covered car parking bays per apartment',
-      'Floor-to-ceiling acoustic double-glazed German windows'
+      '3,600 sq. ft. expansive single-unit per floor apartment',
+      '4 grand bedrooms with 5 ensuite designer bathrooms',
+      '4 wide cross-ventilated verandahs with open city views',
+      'West-facing orientation for abundant natural light & airflow',
+      'B+G+7 building structure with 14 covered parking bays & elevator',
+      'Private lift foyer & designer marble entrance lounge'
     ],
     amenities: [
-      'Parking',
-      'Lift',
-      'Generator',
-      'Security',
-      'Community Space',
-      'Rooftop Garden',
-      'Gymnasium',
-      'EV Charging Point'
+      'Parking (14 Bays)',
+      'High-Speed Elevator',
+      '100% Generator Backup',
+      '24/7 CCTV & Security',
+      'Grand Reception Lobby',
+      'Landscaped Rooftop Deck',
+      'BBQ & Community Terrace'
     ],
     coordinates: [23.7937, 90.4043],
     phone: '09610969620',
-    completionYear: '2025',
-    handoverDate: 'Ready for Immediate Handover'
+    completionYear: '2026',
+    handoverDate: 'Upcoming Exclusive Project'
   },
   {
     id: 'peace-harbor',
@@ -67,7 +67,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalUnits: 16,
     availableUnits: 5,
     soldUnits: 11,
-    status: 'Under Construction',
+    status: 'Ongoing',
     isFeatured: true,
     image: '/assets/peace-harbor.jpg',
     galleryImages: [
@@ -114,7 +114,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalUnits: 14,
     availableUnits: 4,
     soldUnits: 10,
-    status: 'Under Construction',
+    status: 'Ongoing',
     isFeatured: true,
     image: '/assets/anukabbo.jpg',
     galleryImages: [
@@ -144,231 +144,147 @@ export const INITIAL_PROJECTS: Project[] = [
     handoverDate: 'June 2026'
   },
   {
-    id: 'heights',
-    name: 'Starpath Heights',
-    tagline: 'The Pinnacle of Gulshan Elegance',
+    id: 'shurommo',
+    name: 'Starpath Shurommo',
+    tagline: 'Modern Architectural Grandeur',
     area: 'Gulshan',
-    address: 'Road 84, Gulshan-2, Dhaka',
+    address: 'Gulshan, Dhaka',
     block: 'Gulshan 2',
-    price: '৳4.20 Crore',
-    priceRaw: 420,
-    size: '3,200 sq. ft.',
-    sizeSqft: 3200,
-    bedrooms: 4,
+    price: '৳2.85 Crore',
+    priceRaw: 285,
+    size: '2,350 sq. ft.',
+    sizeSqft: 2350,
+    bedrooms: 3,
     bathrooms: 4,
     parking: 2,
-    totalUnits: 18,
+    totalUnits: 12,
     availableUnits: 3,
-    soldUnits: 15,
-    status: 'Almost Sold Out',
-    isFeatured: true,
+    soldUnits: 9,
+    status: 'Ongoing',
+    isFeatured: false,
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1200&q=80'
     ],
-    description: 'Iconic high-rise tower located in diplomatic zone of Gulshan-2. Engineered to international safety standards with panoramic skyline views, infinity rooftop deck, and 24/7 smart building concierge.',
+    description: 'Starpath Shurommo is crafted for those who value contemporary elegance in prime Gulshan. Thoughtfully planned interiors, superior ventilation, and premier urban connectivity.',
     keyFeatures: [
-      '3,200 sq. ft. luxury condominiums',
-      'Direct diplomatic enclave access',
-      'Panoramic glass facades',
-      'Smart security & card access'
+      '2,350 sq. ft. modern luxury apartment',
+      '3 large master bedrooms with attached baths',
+      'Premium European fittings and ceramic tiles',
+      'Double car parking bays & 24/7 security'
     ],
     amenities: [
       'Parking',
       'Lift',
       'Generator',
       'Security',
-      'Community Space',
-      'Rooftop Infinity Deck',
-      'Fitness Club'
+      'Community Hall',
+      'Rooftop Garden'
     ],
     coordinates: [23.7925, 90.4172],
     phone: '09610969620',
-    completionYear: '2025',
-    handoverDate: 'Ready for Handover'
+    completionYear: '2026',
+    handoverDate: 'September 2026'
   },
   {
-    id: 'lake-view',
-    name: 'Starpath Lake View',
-    tagline: 'Serene Waterfront Residences',
-    area: 'Gulshan',
-    address: 'South Avenue, Gulshan-1 Lakeview, Dhaka',
-    block: 'Gulshan 1',
-    price: '৳3.20 Crore',
-    priceRaw: 320,
-    size: '2,850 sq. ft.',
-    sizeSqft: 2850,
-    bedrooms: 3,
+    id: 'rain-drops',
+    name: 'Starpath Rain Drops',
+    tagline: 'Serene Green Living in Dhanmondi',
+    area: 'Dhanmondi',
+    address: 'Dhanmondi, Dhaka',
+    block: 'Road 8/A',
+    price: '৳2.95 Crore',
+    priceRaw: 295,
+    size: '2,750 sq. ft.',
+    sizeSqft: 2750,
+    bedrooms: 4,
     bathrooms: 4,
     parking: 2,
-    totalUnits: 12,
-    availableUnits: 2,
+    totalUnits: 14,
+    availableUnits: 4,
     soldUnits: 10,
-    status: 'Almost Sold Out',
+    status: 'Ongoing',
     isFeatured: false,
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
     ],
-    description: 'Unobstructed waterfront panorama over Gulshan Lake. Thoughtfully planned for quiet reflection while being minutes from prime diplomatic hubs and international schools.',
+    description: 'Starpath Rain Drops brings a refreshing, nature-infused urban lifestyle in Dhanmondi. Designed with expansive private balconies, silent power backup, and landscaped terraces.',
     keyFeatures: [
-      'Direct front view of Gulshan Lake',
-      '3 large balconies with glass balustrades',
-      'Imported fittings & centralized gas pipeline'
+      '2,750 sq. ft. spacious 4-Bedroom layout',
+      'Prime residential pocket of Dhanmondi',
+      'Acoustic double-glazed glass windows',
+      'Landscaped rooftop garden with seating'
     ],
     amenities: [
       'Parking',
       'Lift',
       'Generator',
       'Security',
-      'Community Space',
-      'Lakefront Walking Deck'
+      'Community Lounge',
+      'Rooftop Greenery'
     ],
-    coordinates: [23.7785, 90.4180],
+    coordinates: [23.7461, 90.3742],
     phone: '09610969620',
-    completionYear: '2025',
-    handoverDate: 'November 2025'
+    completionYear: '2026',
+    handoverDate: 'November 2026'
   },
   {
-    id: 'gardenia',
-    name: 'Starpath Gardenia',
-    tagline: 'Lush Botanical Living in Bashundhara',
-    area: 'Bashundhara',
-    address: 'Block I, Bashundhara R/A, Dhaka',
-    block: 'Block I',
-    price: '৳1.85 Crore',
-    priceRaw: 185,
+    id: 'royal-firoza',
+    name: 'Starpath Royal Firoza',
+    tagline: 'Delivered Masterpiece in Uttara',
+    area: 'Uttara',
+    address: 'Sector 4, Uttara, Dhaka',
+    block: 'Sector 4',
+    price: '৳1.80 Crore',
+    priceRaw: 180,
     size: '2,100 sq. ft.',
     sizeSqft: 2100,
     bedrooms: 3,
     bathrooms: 3,
-    parking: 2,
-    totalUnits: 16,
-    availableUnits: 8,
-    soldUnits: 8,
-    status: 'Under Construction',
-    isFeatured: false,
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80'
-    ],
-    description: 'A harmonious blend of lush green landscaping and contemporary architectural grace in Bashundhara Block I, minutes away from top international schools and hospitals.',
-    keyFeatures: [
-      'Landscaped ground and terrace gardens',
-      'Double car parking allotment',
-      '24/7 CCTV surveillance & dedicated guard post'
-    ],
-    amenities: [
-      'Parking',
-      'Lift',
-      'Generator',
-      'Security',
-      'Community Space',
-      'Jogging Path'
-    ],
-    coordinates: [23.8220, 90.4280],
-    phone: '09610969620',
-    completionYear: '2026',
-    handoverDate: 'August 2026'
-  },
-  {
-    id: 'urban-residence',
-    name: 'Starpath Urban Residence',
-    tagline: 'Modern Haven in the Heart of Uttara',
-    area: 'Uttara',
-    address: 'Sector 4, Road 7, Uttara, Dhaka',
-    block: 'Sector 4',
-    price: '৳1.65 Crore',
-    priceRaw: 165,
-    size: '1,950 sq. ft.',
-    sizeSqft: 1950,
-    bedrooms: 3,
-    bathrooms: 3,
     parking: 1,
-    totalUnits: 22,
-    availableUnits: 6,
-    soldUnits: 16,
-    status: 'Ready to Move',
+    totalUnits: 18,
+    availableUnits: 0,
+    soldUnits: 18,
+    status: 'Handed Over',
     isFeatured: false,
     image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80'
     ],
-    description: 'Strategically located in Uttara Sector 4 with rapid access to Dhaka Airport and Expressway. Features energy-efficient ventilation, imported tiles, and high-speed passenger lifts.',
+    description: 'Starpath Royal Firoza stands as a testament to timely delivery and premier construction quality by Starpath Holdings Ltd. Fully completed, handed over, and now home to distinguished families.',
     keyFeatures: [
-      'Immediate airport expressway connection',
-      '100% power backup with silent generator',
-      'Community lounge and rooftop prayer hall'
+      'Successfully delivered on schedule',
+      '100% sold out and occupied by owners',
+      'Seismic-resistant RCC frame construction',
+      'Complete standby generator backup & security'
     ],
     amenities: [
       'Parking',
       'Lift',
       'Generator',
       'Security',
-      'Community Space',
-      'Prayer Room'
+      'Community Hall'
     ],
     coordinates: [23.8685, 90.3980],
     phone: '09610969620',
     completionYear: '2024',
-    handoverDate: 'Ready for Immediate Handover'
-  },
-  {
-    id: 'signature-dhanmondi',
-    name: 'Starpath Signature',
-    tagline: 'Timeless Prestige in Classical Dhanmondi',
-    area: 'Dhanmondi',
-    address: 'Road 9/A, Dhanmondi, Dhaka',
-    block: 'Road 9/A',
-    price: '৳3.10 Crore',
-    priceRaw: 310,
-    size: '3,100 sq. ft.',
-    sizeSqft: 3100,
-    bedrooms: 4,
-    bathrooms: 4,
-    parking: 2,
-    totalUnits: 15,
-    availableUnits: 3,
-    soldUnits: 12,
-    status: 'Under Construction',
-    isFeatured: false,
-    image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80'
-    ],
-    description: 'An architectural statement on Dhanmondi 9/A. Designed for distinguished families seeking space, calm, and heritage neighborhood charm close to Dhanmondi Lake.',
-    keyFeatures: [
-      'Single unit per floor for maximum privacy',
-      'Huge master suite with walk-in wardrobe',
-      'Modern seismic-resistant construction'
-    ],
-    amenities: [
-      'Parking',
-      'Lift',
-      'Generator',
-      'Security',
-      'Community Space',
-      'Rooftop Terrace'
-    ],
-    coordinates: [23.7461, 90.3742],
-    phone: '09610969620',
-    completionYear: '2026',
-    handoverDate: 'October 2026'
+    handoverDate: 'Successfully Handed Over'
   }
 ];
 
 export const INITIAL_INQUIRIES: Inquiry[] = [
   {
     id: 'inq-101',
-    projectId: 'grand-residence',
-    projectName: 'Starpath Grand Residence',
+    projectId: 'barakah',
+    projectName: 'Starpath Barakah',
     projectArea: 'Banani',
     fullName: 'Mahmudur Rahman',
     phone: '01711223344',
     email: 'mahmud.rahman@example.com',
-    message: 'Interested in 4 Bed unit on 5th floor. Looking for site visit this weekend.',
+    message: 'Interested in 4-Bed single unit 3,600 sqft apartment at Banani DOHS.',
     preferredDate: 'Saturday, 11:00 AM',
     timestamp: '10 mins ago',
     status: 'New'
@@ -381,7 +297,7 @@ export const INITIAL_INQUIRIES: Inquiry[] = [
     fullName: 'Dr. Nusrat Jahan',
     phone: '01819556677',
     email: 'nusrat.jahan@healthbd.org',
-    message: 'Please send pricing breakdown and payment installment schedule for 2,400 sqft apartment.',
+    message: 'Please send pricing breakdown and payment installment schedule for 2,400 sqft apartment in Block-D.',
     preferredDate: 'Friday, 4:00 PM',
     timestamp: '2 hours ago',
     status: 'New'
@@ -394,7 +310,7 @@ export const INITIAL_INQUIRIES: Inquiry[] = [
     fullName: 'Tanvir Hossain',
     phone: '01912998877',
     email: 'tanvir.h@techbd.com',
-    message: 'Would like to inquire about loan processing support and handover timeline.',
+    message: 'Would like to inquire about loan processing support and handover timeline for Block B.',
     preferredDate: 'Tomorrow, 3:30 PM',
     timestamp: '5 hours ago',
     status: 'Contacted'
@@ -402,11 +318,11 @@ export const INITIAL_INQUIRIES: Inquiry[] = [
 ];
 
 export const AREAS = [
-  { name: 'All', count: 8, image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Gulshan', count: 2, image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Banani', count: 1, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Bashundhara', count: 2, image: '/assets/peace-harbor.jpg' },
+  { name: 'All', count: 6, image: '/assets/barakah-main.jpg' },
+  { name: 'Banani', count: 1, image: '/assets/barakah-main.jpg' },
+  { name: 'Bashundhara', count: 1, image: '/assets/peace-harbor.jpg' },
   { name: 'Aftabnagar', count: 1, image: '/assets/anukabbo.jpg' },
-  { name: 'Uttara', count: 1, image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Dhanmondi', count: 1, image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Gulshan', count: 1, image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Dhanmondi', count: 1, image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Uttara', count: 1, image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80' }
 ];

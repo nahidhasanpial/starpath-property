@@ -23,29 +23,29 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
   const [showDemoGuide, setShowDemoGuide] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
 
-  const grandResidence = projects.find(p => p.id === 'grand-residence');
+  const barakahProject = projects.find(p => p.id === 'barakah');
 
   const handleSimulateSync = () => {
-    if (grandResidence) {
+    if (barakahProject) {
       updateProject({
-        ...grandResidence,
+        ...barakahProject,
         availableUnits: 6,
-        soldUnits: 14
+        soldUnits: 1
       });
-      setSelectedProjectId('grand-residence');
+      setSelectedProjectId('barakah');
     }
   };
 
   const handleSimulateInquiry = () => {
-    if (grandResidence) {
+    if (barakahProject) {
       addInquiry({
-        projectId: grandResidence.id,
-        projectName: grandResidence.name,
-        projectArea: grandResidence.area,
+        projectId: barakahProject.id,
+        projectName: barakahProject.name,
+        projectArea: barakahProject.area,
         fullName: 'Managing Director Office',
         phone: '01711998877',
         email: 'md@starpathholdings.com',
-        message: 'Requesting VIP site inspection and pent-house floor plan brochure.',
+        message: 'Requesting VIP site inspection for single unit floor plan brochure at Banani DOHS.',
         preferredDate: 'Tomorrow, 11:30 AM'
       });
       setActiveTab('admin');
@@ -67,12 +67,13 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
           {/* Quick Demo Status Badge */}
           <div className="flex items-center space-x-1.5 bg-slate-800/80 px-2.5 py-1 rounded-xl border border-slate-700 text-[11px]">
             <Sparkles className="w-3 h-3 text-red-400" />
-            <span>Grand Residence:</span>
+            <span>Starpath Barakah:</span>
             <span className="font-mono font-bold text-emerald-400">
-              {grandResidence ? `${grandResidence.availableUnits} Units Available` : '7 Units'}
+              {barakahProject ? `${barakahProject.availableUnits} Units Available` : '7 Units'}
             </span>
           </div>
         </div>
+
 
         {/* Action Shortcuts */}
         <div className="flex items-center space-x-2">
@@ -199,10 +200,10 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
               {/* Step 3 */}
               <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-red-400">Step 3: Starpath Grand Residence</span>
+                  <span className="font-bold text-red-400">Step 3: Starpath Barakah (Banani DOHS)</span>
                   <button
                     onClick={() => {
-                      setSelectedProjectId('grand-residence');
+                      setSelectedProjectId('barakah');
                       setShowDemoGuide(false);
                     }}
                     className="bg-slate-700 hover:bg-slate-600 text-white text-[10px] font-bold px-2 py-1 rounded-lg"
@@ -211,7 +212,7 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
                   </button>
                 </div>
                 <p className="text-slate-300 text-[11px] mt-1">
-                  Show starting state of <strong>7 Units Available</strong>, specs (3,600 sqft, 4 Bed, 5 Bath), and amenities.
+                  Show starting state of <strong>7 Units Available</strong>, specs (3,600 sqft, 4 Bed, 5 Bath, 4 Verandahs, Single unit/floor), and real lobby/parking/rooftop photos.
                 </p>
               </div>
 
@@ -233,6 +234,7 @@ export const DeviceFrame: React.FC<{ children: React.ReactNode }> = ({ children 
                   Demonstrates management adjusting unit availability down to <strong>6 units</strong>, updating buyer screens instantly.
                 </p>
               </div>
+
 
               {/* Step 5 */}
               <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-3">

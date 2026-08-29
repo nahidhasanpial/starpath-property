@@ -145,7 +145,7 @@ export const AdminDashboard: React.FC = () => {
             <div className="text-xs">
               <p className="font-bold text-red-200">Management Demo Workflow:</p>
               <p className="text-[11px] text-slate-300 mt-0.5 leading-snug">
-                Click <span className="font-bold text-white">Edit</span> on <em>Starpath Grand Residence</em> below, change units from <span className="bg-red-600/60 px-1 py-0.2 rounded font-mono font-bold text-white">7 → 6</span>, then inspect the buyer view.
+                Click <span className="font-bold text-white">Edit</span> on <em>Starpath Barakah</em> below, change units from <span className="bg-red-600/60 px-1 py-0.2 rounded font-mono font-bold text-white">7 → 6</span>, then inspect the buyer view.
               </p>
             </div>
           </div>
@@ -153,10 +153,11 @@ export const AdminDashboard: React.FC = () => {
 
         {resetSuccessNotice && (
           <div className="mt-2 text-center text-xs font-bold text-emerald-400 bg-emerald-950/80 py-1.5 rounded-xl border border-emerald-800">
-            ✓ Demo data reset: Starpath Grand Residence set to 7 Available Units
+            ✓ Demo data reset: Starpath Barakah set to 7 Available Units
           </div>
         )}
       </div>
+
 
       {/* KPI Cards Dashboard Grid */}
       <div className="px-4 -mt-3">
@@ -310,7 +311,8 @@ export const AdminDashboard: React.FC = () => {
       {/* Project Management Cards */}
       <div className="px-4 space-y-3">
         {projects.map((project) => {
-          const isTargetDemo = project.id === 'grand-residence';
+          const isTargetDemo = project.id === 'barakah';
+
 
           return (
             <div

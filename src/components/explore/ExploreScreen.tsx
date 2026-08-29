@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useProperty } from '../../context/PropertyContext';
 import { Search, Filter, SlidersHorizontal, MapPin, Heart, Eye, Info, X, Check, Bed, ChevronDown } from 'lucide-react';
 import { Area } from '../../types';
@@ -51,6 +51,13 @@ export const ExploreScreen: React.FC = () => {
       return false;
     }
 
+    // Status filter
+    if (filterState.status && filterState.status !== 'all') {
+      if (filterState.status === 'Ongoing' && p.status !== 'Ongoing') return false;
+      if (filterState.status === 'Upcoming' && p.status !== 'Upcoming') return false;
+      if (filterState.status === 'Handed Over' && p.status !== 'Handed Over') return false;
+    }
+
     // Only available
     if (filterState.onlyAvailable && p.availableUnits <= 0) {
       return false;
@@ -101,16 +108,38 @@ export const ExploreScreen: React.FC = () => {
           )}
         </div>
 
+        {/* Project Status Filter Tabs (Ongoing vs Upcoming vs Handed Over) */}
+        <div className="flex space-x-1.5 pt-2.5 border-b border-slate-100 pb-2 overflow-x-auto no-scrollbar">
+          {[
+            { label: 'All Projects', value: 'all' },
+            { label: '🏗️ Ongoing', value: 'Ongoing' },
+            { label: '✨ Upcoming', value: 'Upcoming' },
+            { label: '🔑 Handed Over', value: 'Handed Over' }
+          ].map((st) => (
+            <button
+              key={st.value}
+              onClick={() => setFilterState(prev => ({ ...prev, status: st.value }))}
+              className={`text-[11px] font-bold px-3 py-1 rounded-xl whitespace-nowrap transition ${
+                (filterState.status || 'all') === st.value
+                  ? 'bg-red-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              {st.label}
+            </button>
+          ))}
+        </div>
+
         {/* Horizontal Area Filter Chips */}
-        <div className="flex space-x-1.5 overflow-x-auto no-scrollbar pt-2.5">
+        <div className="flex space-x-1.5 overflow-x-auto no-scrollbar pt-2">
           {areas.map((area) => (
             <button
               key={area}
               onClick={() => setFilterState(prev => ({ ...prev, area }))}
-              className={`text-[11px] font-semibold px-3 py-1 rounded-full whitespace-nowrap transition-all ${
+              className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full whitespace-nowrap transition-all ${
                 filterState.area === area
                   ? 'bg-[#0B1F3A] text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200/80'
               }`}
             >
               {area}
@@ -118,6 +147,7 @@ export const ExploreScreen: React.FC = () => {
           ))}
         </div>
       </div>
+
 
       {/* Demo Data Notice Banner */}
       <div className="mx-4 mt-3 bg-amber-50 border border-amber-200 rounded-xl p-2.5 flex items-center space-x-2">

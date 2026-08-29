@@ -1,6 +1,7 @@
-﻿export type Area = 'Gulshan' | 'Banani' | 'Bashundhara' | 'Uttara' | 'Dhanmondi' | 'Aftabnagar' | 'All';
+export type Area = 'Gulshan' | 'Banani' | 'Bashundhara' | 'Uttara' | 'Dhanmondi' | 'Aftabnagar' | 'All';
 
-export type PropertyStatus = 'Under Construction' | 'Ready to Move' | 'Upcoming' | 'Almost Sold Out';
+export type PropertyStatus = 'Ongoing' | 'Upcoming' | 'Handed Over' | 'Under Construction' | 'Ready to Move' | 'Almost Sold Out';
+
 
 export interface Amenity {
   id: string;

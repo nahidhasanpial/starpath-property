@@ -223,7 +223,7 @@ export const InquiryModal: React.FC = () => {
             </div>
           ) : (
             /* Thank You State */
-            <div className="text-center py-6 animate-in zoom-in-95 duration-200">
+            <div className="text-center py-8 animate-in zoom-in-95 duration-200">
               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
                 <CheckCircle2 className="w-9 h-9" />
               </div>
@@ -231,41 +231,20 @@ export const InquiryModal: React.FC = () => {
               <h3 className="text-xl font-black text-[#0B1F3A] tracking-tight">
                 Thank You!
               </h3>
-              <p className="text-xs text-slate-600 mt-2 max-w-[280px] mx-auto leading-relaxed">
-                Your inquiry has been sent to <span className="font-bold text-slate-900">Starpath Holdings Ltd.</span>
+              <p className="text-sm font-semibold text-slate-800 mt-2 max-w-[280px] mx-auto leading-relaxed">
+                We have received your inquiry and our team will contact you soon.
               </p>
 
-              <div className="inline-flex items-center space-x-1.5 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Live Synced to Starpath CRM & Google Sheets</span>
-              </div>
+              <p className="text-xs text-slate-500 mt-2 max-w-[270px] mx-auto">
+                Our property specialist for <span className="font-bold text-slate-800">{inquiryTargetProject.name}</span> will get in touch with you shortly.
+              </p>
 
-
-              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 my-5 text-left text-xs space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-slate-400 font-medium">Inquiry Ref:</span>
-                  <span className="font-mono font-bold text-slate-800">{submittedId}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400 font-medium">Project:</span>
-                  <span className="font-bold text-[#0B1F3A]">{inquiryTargetProject.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400 font-medium">Customer:</span>
-                  <span className="font-bold text-slate-800">{fullName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400 font-medium">Phone:</span>
-                  <span className="font-bold text-slate-800">{phone}</span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5">
+              <div className="space-y-2.5 mt-6">
                 <a
                   href="tel:09610969620"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl transition flex items-center justify-center space-x-1.5 shadow-xs"
+                  className="w-full bg-[#0B1F3A] hover:bg-slate-800 text-white text-xs font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 shadow-xs"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-emerald-400" />
                   <span>Call Starpath Hotline (09610969620)</span>
                 </a>
 
@@ -283,3 +262,4 @@ export const InquiryModal: React.FC = () => {
     </div>
   );
 };
+
